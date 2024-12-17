@@ -6,13 +6,13 @@ const prisma = new PrismaClient();
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await auth();
   const { id } = await params;
 
   if (!session) {
-    return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
@@ -23,9 +23,9 @@ export async function GET(
 
     return NextResponse.json(comments);
   } catch (error) {
-    console.error("Erro ao buscar comentários:", error);
+    console.error("Error fetching comments:", error);
     return NextResponse.json(
-      { error: "Erro ao buscar comentários" },
+      { error: "Error fetching comments" },
       { status: 500 }
     );
   } finally {
@@ -35,11 +35,13 @@ export async function GET(
 
 export async function POST(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await auth();
+  const { id } = await params;
+
   if (!session) {
-    return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
@@ -47,15 +49,15 @@ export async function POST(
     const comment = await prisma.comment.create({
       data: {
         content,
-        projectId: params.id,
+        projectId: id,
       },
     });
 
     return NextResponse.json(comment);
   } catch (error) {
-    console.error("Erro ao adicionar comentário:", error);
+    console.error("Error adding comment:", error);
     return NextResponse.json(
-      { error: "Erro ao adicionar comentário" },
+      { error: "Error adding comment" },
       { status: 500 }
     );
   } finally {

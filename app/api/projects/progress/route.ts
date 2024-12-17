@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 export async function GET() {
   const session = await auth();
   if (!session) {
-    return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
@@ -26,9 +26,9 @@ export async function GET() {
 
     return NextResponse.json(projects);
   } catch (error) {
-    console.error("Erro ao buscar progresso dos projetos:", error);
+    console.error("Error fetching project progress:", error);
     return NextResponse.json(
-      { error: "Erro ao buscar progresso dos projetos" },
+      { error: "Error fetching project progress" },
       { status: 500 }
     );
   } finally {

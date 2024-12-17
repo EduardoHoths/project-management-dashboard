@@ -7,7 +7,7 @@ const prisma = new PrismaClient()
 export async function GET() {
   const session = await auth()
   if (!session) {
-    return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
   try {
@@ -30,10 +30,9 @@ export async function GET() {
       completedProjects
     })
   } catch (error) {
-    console.error('Erro ao buscar resumo dos projetos:', error)
-    return NextResponse.json({ error: 'Erro ao buscar resumo dos projetos' }, { status: 500 })
+    console.error('Error fetching project summary:', error)
+    return NextResponse.json({ error: 'Error fetching project summary' }, { status: 500 })
   } finally {
     await prisma.$disconnect()
   }
 }
-
