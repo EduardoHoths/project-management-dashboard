@@ -8,7 +8,6 @@ export default async function ProjectPage({
   params: { id: string };
 }) {
   const session = await auth();
-  const { id } = await params;
 
   if (!session) {
     redirect("/api/auth/signin");
@@ -17,7 +16,7 @@ export default async function ProjectPage({
   return (
     <div className="min-h-screen bg-background">
       <main className="container mx-auto p-4">
-        <ProjectDetails id={id} />
+        <ProjectDetails id={params.id} />
       </main>
     </div>
   );
