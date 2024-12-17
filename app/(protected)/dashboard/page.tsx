@@ -3,7 +3,7 @@ import { ProjectSummary } from "@/components/project/project-summary";
 import { ProjectProgress } from "@/components/project/project-progress";
 import { auth } from "@/auth";
 
-export default async function Home() {
+export default async function DashboardP() {
   const session = await auth();
 
   if (!session) {

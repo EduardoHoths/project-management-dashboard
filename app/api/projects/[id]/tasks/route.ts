@@ -13,7 +13,7 @@ export async function GET(
   const { id } = await params;
 
   if (!session) {
-    return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
@@ -24,9 +24,9 @@ export async function GET(
 
     return NextResponse.json(tasks);
   } catch (error) {
-    console.error("Erro ao buscar tarefas:", error);
+    console.error("Error fetching tasks:", error);
     return NextResponse.json(
-      { error: "Erro ao buscar tarefas" },
+      { error: "Error fetching tasks" },
       { status: 500 }
     );
   } finally {
@@ -42,7 +42,7 @@ export async function POST(
   const { id } = await params;
 
   if (!session) {
-    return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
@@ -58,9 +58,9 @@ export async function POST(
 
     return NextResponse.json(task);
   } catch (error) {
-    console.error("Erro ao adicionar tarefa:", error);
+    console.error("Error adding task:", error);
     return NextResponse.json(
-      { error: "Erro ao adicionar tarefa" },
+      { error: "Error adding task" },
       { status: 500 }
     );
   } finally {

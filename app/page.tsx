@@ -21,7 +21,7 @@ export default function HomePage() {
         </div>
       </div>
       <footer className="absolute bottom-4 text-sm opacity-75">
-        © 2023 Gerenciador de Projetos. Todos os direitos reservados.
+        © 2024 Gerenciador de Projetos. Todos os direitos reservados.
       </footer>
     </div>
   );
